@@ -1,11 +1,13 @@
 @import './variables';
 
 
-body{
+// *{
+//     margin: 0px 20px;
+// }
+
+body {
     font-family: 'Lato', sans-serif;
     -webkit-font-smoothing: antialiased;
-    // color: gray;
-    height: 4000px;
 }
 
 nav li:last-child a {
@@ -34,6 +36,18 @@ section.home-page {
     background: $secondary;
 }
 
+.btn-primary{
+    background: $primary;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    &:hover {
+        background: $primary-hover;
+    }
+}
+
 .add-to-cart {
     border: 2px solid $primary;
     color: $primary;
@@ -46,5 +60,23 @@ section.home-page {
         background: $primary;
         border-color: $pure;
         color: $pure;
+    }
+}
+
+section.cart {
+    background: $secondary;
+    .total-amount {
+        color: $primary;
+    }
+}
+
+section.auth {
+    background: $secondary;
+    min-height: calc(100vh - 86px);
+    a {
+        color: $primary;
+        &:hover {
+            color: $primary-hover;
+        }
     }
 }

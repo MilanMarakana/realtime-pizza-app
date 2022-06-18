@@ -1,7 +1,6 @@
 body {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
-  height: 4000px;
 }
 
 nav li:last-child a {
@@ -30,6 +29,18 @@ section.home-page {
   background: #F8F8F8;
 }
 
+.btn-primary {
+  background: #FE5F1E;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+.btn-primary:hover {
+  background: #B23301;
+}
+
 .add-to-cart {
   border: 2px solid #FE5F1E;
   color: #FE5F1E;
@@ -43,4 +54,22 @@ section.home-page {
   background: #FE5F1E;
   border-color: #fff;
   color: #fff;
+}
+
+section.cart {
+  background: #F8F8F8;
+}
+section.cart .total-amount {
+  color: #FE5F1E;
+}
+
+section.auth {
+  background: #F8F8F8;
+  min-height: calc(100vh - 86px);
+}
+section.auth a {
+  color: #FE5F1E;
+}
+section.auth a:hover {
+  color: #B23301;
 }
