@@ -1,4 +1,5 @@
 // import express from 'express';
+require('dotenv').config();
 const express = require('express');
 // import ejs from 'ejs';
 const ejs = require('ejs');
@@ -6,7 +7,9 @@ const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
 // import path from 'path';
 const path = require('path');
-
+const session = require('express-session');
+const flash = require('express-flash');
+const MongoDbStore = require('connect-mongo')(session);
 // import { fileURLToPath } from 'url';
 
 // const __filename = fileURLToPath(import.meta.url);
@@ -14,13 +17,13 @@ const path = require('path');
 // const __dirname = path.dirname(__filename);
 
 const app = express();
+
 const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 3000;
 
 //Database Connection
-const url =
-  'mongodb+srv://Milan_Patel:I%40mgunatit369@cluster0.pkwubrq.mongodb.net/pizza?retryWrites=true&w=majority';
+const url = process.env.CONNECTION_URL;
 mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -41,8 +44,34 @@ connection.once('open', () => {
 //   console.log(err.message);
 // });
 
+//session MongoDbStore
+let mongoStore = new MongoDbStore({
+  mongooseConnection: connection,
+  collection: 'sessions',
+});
+
+//session config
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    store: mongoStore,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  })
+);
+
+app.use(flash());
+
 //Assests
 app.use(express.static('public'));
+app.use(express.json());
+
+//Global middleware
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
 
 //set a layouts
 app.use(expressLayouts);

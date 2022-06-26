@@ -1,5 +1,6 @@
 @import './variables';
-
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/mint.scss';
 
 // *{
 //     margin: 0px 20px;
@@ -46,6 +47,9 @@ section.home-page {
     &:hover {
         background: $primary-hover;
     }
+    &:focus{
+        outline: none;
+    }
 }
 
 .add-to-cart {
@@ -60,6 +64,9 @@ section.home-page {
         background: $primary;
         border-color: $pure;
         color: $pure;
+    }
+    &:focus{
+        outline: none;
     }
 }
 
@@ -79,4 +86,13 @@ section.auth {
             color: $primary-hover;
         }
     }
+}
+
+.noty_theme__mint{
+    border-radius: 50px !important;
+    -webkit-border-radius: 50px !important;
+    -moz-border-radius: 50px !important;
+    -ms-border-radius: 50px !important;
+    -o-border-radius: 50px !important;
+    padding-left: 8px !important;
 }
