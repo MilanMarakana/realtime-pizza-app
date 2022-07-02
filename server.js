@@ -10,6 +10,7 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('express-flash');
 const MongoDbStore = require('connect-mongo')(session);
+const passport = require('passport');
 // import { fileURLToPath } from 'url';
 
 // const __filename = fileURLToPath(import.meta.url);
@@ -63,13 +64,21 @@ app.use(
 
 app.use(flash());
 
+//passport config
+const initializePassport = require('./app/config/passport');
+initializePassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Assests
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //Global middleware
 app.use((req, res, next) => {
   res.locals.session = req.session;
+  res.locals.user = req.user;
   next();
 });
 
